@@ -162,7 +162,7 @@ body {
 
 .navbar-collapsed .nav-brand {
     /* Moved up more - was 56px, now 52px for proportional adjustment */
-    top: 32px;
+    top: 3422px;
     transform: translate(-50%, -50%) translateZ(0);
     -webkit-transform: translate(-50%, -50%) translateZ(0);
 }
