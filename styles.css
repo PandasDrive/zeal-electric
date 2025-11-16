@@ -137,7 +137,7 @@ body {
 .nav-brand {
     position: absolute;
     left: 50%;
-    top: 75px; /* Moved up more for better centering - was 140px */
+    top: 75px; /* Fixed position - half of 300px min-height adjusted */
     transform: translate(-50%, -50%) translateZ(0);
     -webkit-transform: translate(-50%, -50%) translateZ(0);
     z-index: 10;
@@ -156,15 +156,20 @@ body {
     -webkit-backface-visibility: hidden;
     transform-origin: center center;
     -webkit-transform-origin: center center;
-    /* Smooth transition to match navbar min-height change */
+    /* Only transition when navbar state changes, not on initial load */
+    transition: none;
+}
+
+.navbar:not(.navbar-collapsed) .nav-brand {
     transition: top 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .navbar-collapsed .nav-brand {
-    /* Moved up more - was 56px, now 52px for proportional adjustment */
-    top: 3422px;
+    /* Fixed position - half of 120px collapsed min-height = 60px, adjusted to 32px */
+    top: 32px;
     transform: translate(-50%, -50%) translateZ(0);
     -webkit-transform: translate(-50%, -50%) translateZ(0);
+    transition: top 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .nav-brand .logo {
