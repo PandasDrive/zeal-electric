@@ -33,9 +33,9 @@ html {
 }
 
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-family: Georgia, 'Times New Roman', Times, serif;
     color: var(--text-white);
-    line-height: 1.6;
+    line-height: 1.7;
     overflow-x: hidden;
     background: var(--bg-dark);
 }
