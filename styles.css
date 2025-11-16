@@ -367,7 +367,7 @@ body {
     overflow: hidden;
     min-height: 700px;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: center;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -428,8 +428,13 @@ body {
     text-align: center;
     max-width: 900px;
     margin: 0 auto;
-    padding: 0 20px 5rem;
+    padding: 0 20px;
     width: 100%;
+    /* Center content vertically in hero */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .hero-title {
@@ -452,6 +457,7 @@ body {
     gap: 1rem;
     justify-content: center;
     flex-wrap: wrap;
+    margin-top: 1rem;
 }
 
 /* Buttons */
