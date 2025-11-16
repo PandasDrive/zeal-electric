@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact Zeal Electric for electrical services. Get a free estimate, ask questions, or schedule service. (714) 981-7671">
+    <title>Contact Us - Zeal Electric</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <ul class="nav-menu nav-left" id="navMenuLeft">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+            </ul>
+            <div class="nav-brand">
+                <a href="index.html" class="logo">
+                    <img src="images/zeal-electric-logo.png" alt="Zeal Electric Logo" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+                    <span class="logo-text" style="display:none;">Zeal Electric</span>
+                </a>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu nav-right" id="navMenu">
+                <li><a href="careers.html">Career Opportunities</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+                <li><a href="contact.html#quote" class="btn-primary">Get Free Estimate</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Contact Us</h1>
+        </div>
+    </section>
+
+    <!-- Contact CTA Section -->
+    <section class="contact-cta">
+        <div class="container">
+            <h2 class="contact-cta-title">A Brighter Future With One Connection</h2>
+            <p class="cta-text">
+                We don't just complete projects, we build lasting relationships. Our team keeps communication open at every step to ensure your vision becomes reality. Have a question, need a quote, or want to plan something unique? Feel free to call, text, or email us. We'd love to hear from you.
+            </p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <strong>Zeal Electric</strong>
+                    <p><a href="tel:7149817671">(714) 981-7671</a></p>
+                    <p><a href="mailto:Admin@Zeal-Electric.com">Admin@Zeal-Electric.com</a></p>
+                </div>
+                <div class="contact-item">
+                    <strong>Hours</strong>
+                    <p>Monday - Friday: 8:00 AM - 5:00 PM</p>
+                    <p>Saturday - Sunday: Closed</p>
+                </div>
+            </div>
+            <div class="text-center">
+                <a href="#quote" class="btn btn-large">Get a Free Quote!</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Info -->
+    <section class="contact-info-section">
+        <div class="container">
+            <div class="contact-info-grid">
+                <div class="contact-info-card">
+                    <h3>Get in Touch</h3>
+                    <p>We don't just complete projects, we build lasting relationships. Our team keeps communication open at every step to ensure your vision becomes reality.</p>
+                    <div class="contact-details">
+                        <div class="contact-detail-item">
+                            <strong>Phone</strong>
+                            <p><a href="tel:7149817671">(714) 981-7671</a></p>
+                        </div>
+                        <div class="contact-detail-item">
+                            <strong>Email</strong>
+                            <p><a href="mailto:Admin@Zeal-Electric.com">Admin@Zeal-Electric.com</a></p>
+                        </div>
+                        <div class="contact-detail-item">
+                            <strong>Hours</strong>
+                            <p>Monday - Friday: 8:00 AM - 5:00 PM</p>
+                            <p>Saturday - Sunday: Closed</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-info-card">
+                    <h3>Service Area</h3>
+                    <p>We proudly serve Orange County and surrounding areas. Contact us to see if we service your location.</p>
+                    <div class="service-areas">
+                        <p><strong>Primary Service Area:</strong></p>
+                        <ul>
+                            <li>Orange County, CA</li>
+                            <li>Surrounding Communities</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quote Form Section -->
+    <section class="quote-section" id="quote">
+        <div class="container">
+            <h2 class="section-title">Get a Free Quote</h2>
+            <p class="section-subtitle">Fill out the form below and we'll get back to you as soon as possible</p>
+            <form class="quote-form" id="quoteForm">
+                <div class="form-group">
+                    <label for="name">Name *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="tel" id="phone" name="phone">
+                </div>
+                <div class="form-group">
+                    <label for="address">Address (Street, City, Zip Code)</label>
+                    <input type="text" id="address" name="address">
+                </div>
+                <div class="form-group">
+                    <label for="service">Service Needed</label>
+                    <select id="service" name="service">
+                        <option value="">Select a service</option>
+                        <option value="residential">Residential Electrical</option>
+                        <option value="commercial">Commercial Electrical</option>
+                        <option value="repairs">Electrical Repairs</option>
+                        <option value="installation">Installation & Upgrades</option>
+                        <option value="inspection">Inspection & Maintenance</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">Project Details</label>
+                    <textarea id="message" name="message" rows="5" placeholder="Tell us about your project..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="files">Attach Files (Optional)</label>
+                    <input type="file" id="files" name="files" multiple>
+                    <small>You can attach photos or documents related to your project</small>
+                </div>
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="consent" name="consent" required>
+                    <label for="consent">I agree to be contacted by Zeal Electric regarding my inquiry *</label>
+                </div>
+                <button type="submit" class="btn btn-large">Send Request</button>
+                <p class="form-note">
+                    <small>This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.</small>
+                </p>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Zeal Electric</h3>
+                    <p>Expert electrical services built on integrity, precision, and purpose.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="careers.html">Career Opportunities</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Phone: <a href="tel:7149817671">(714) 981-7671</a></p>
+                    <p>Email: <a href="mailto:Admin@Zeal-Electric.com">Admin@Zeal-Electric.com</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Copyright © <span id="currentYear"></span> Zeal Electric - All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cookie Consent -->
+    <div class="cookie-consent" id="cookieConsent">
+        <div class="cookie-content">
+            <h4>This website uses cookies.</h4>
+            <p>We use cookies to analyze website traffic and optimize your website experience. By accepting our use of cookies, your data will be aggregated with all other user data.</p>
+            <button class="btn btn-cookie" onclick="acceptCookies()">Accept</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
