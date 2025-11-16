@@ -160,6 +160,33 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 1000);
         }
     }
+
+    // Services Accordion Functionality
+    const accordionHeaders = document.querySelectorAll('.service-accordion-header');
+    accordionHeaders.forEach(header => {
+        header.addEventListener('click', function() {
+            const item = this.parentElement;
+            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+            
+            // Close all other accordion items (optional - remove if you want multiple open)
+            accordionHeaders.forEach(otherHeader => {
+                if (otherHeader !== this) {
+                    const otherItem = otherHeader.parentElement;
+                    otherHeader.setAttribute('aria-expanded', 'false');
+                    otherItem.setAttribute('aria-expanded', 'false');
+                }
+            });
+            
+            // Toggle current item
+            if (isExpanded) {
+                this.setAttribute('aria-expanded', 'false');
+                item.setAttribute('aria-expanded', 'false');
+            } else {
+                this.setAttribute('aria-expanded', 'true');
+                item.setAttribute('aria-expanded', 'true');
+            }
+        });
+    });
 });
 
 // Cookie consent function

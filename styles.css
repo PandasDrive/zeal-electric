@@ -643,6 +643,165 @@ section {
     gap: 2rem;
 }
 
+/* Services Accordion */
+.services-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.service-accordion-item {
+    position: relative;
+    background: var(--bg-dark-gray);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    transition: var(--transition);
+    isolation: isolate;
+}
+
+.service-accordion-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: var(--service-bg-image);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.3;
+    z-index: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.service-accordion-item:hover .service-accordion-bg {
+    opacity: 0.4;
+    transform: scale(1.02);
+}
+
+.service-accordion-header {
+    position: relative;
+    width: 100%;
+    background: rgba(26, 26, 26, 0.75);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: none;
+    padding: 2rem;
+    cursor: pointer;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+    transition: var(--transition);
+    z-index: 1;
+    border-radius: 15px;
+}
+
+.service-accordion-header:hover {
+    background: rgba(26, 26, 26, 0.85);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+}
+
+.service-accordion-item[aria-expanded="true"] .service-accordion-header {
+    background: rgba(26, 26, 26, 0.9);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 15px 15px 0 0;
+}
+
+.service-accordion-header-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    flex: 1;
+}
+
+.service-accordion-title-group {
+    flex: 1;
+}
+
+.service-accordion-header h2 {
+    font-size: 1.8rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-white);
+    font-weight: 600;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.service-summary {
+    color: var(--text-light);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.service-accordion-icon {
+    font-size: 1.2rem;
+    color: var(--accent-color);
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+    min-width: 24px;
+    display: inline-block;
+}
+
+.service-accordion-item[aria-expanded="true"] .service-accordion-icon {
+    transform: rotate(180deg);
+}
+
+.service-accordion-content {
+    position: relative;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+    padding: 0 2rem;
+    background: rgba(26, 26, 26, 0.85);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    z-index: 1;
+    border-radius: 0 0 15px 15px;
+}
+
+.service-accordion-item[aria-expanded="true"] .service-accordion-content {
+    max-height: 5000px;
+    padding: 0 2rem 2rem 2rem;
+    background: rgba(26, 26, 26, 0.9);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+.service-accordion-content p {
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.service-accordion-content h3 {
+    font-size: 1.4rem;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-white);
+    font-weight: 600;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.service-accordion-content h3:first-of-type {
+    margin-top: 1rem;
+}
+
+.service-icon-large {
+    font-size: 3.5rem;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+/* Legacy support for old service cards */
 .service-category {
     margin-bottom: 3rem;
 }
@@ -659,11 +818,6 @@ section {
 .service-detail-card:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-lg);
-}
-
-.service-icon-large {
-    font-size: 4rem;
-    margin-bottom: 1rem;
 }
 
 .service-detail-card h2 {
@@ -1461,6 +1615,41 @@ section {
     .services-grid,
     .service-detail-grid {
         grid-template-columns: 1fr;
+    }
+
+    /* Services Accordion Mobile */
+    .service-accordion-header {
+        padding: 1.5rem;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .service-accordion-header-content {
+        gap: 1rem;
+    }
+
+    .service-accordion-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .service-summary {
+        font-size: 0.95rem;
+    }
+
+    .service-icon-large {
+        font-size: 2.5rem;
+    }
+
+    .service-accordion-content {
+        padding: 0 1.5rem;
+    }
+
+    .service-accordion-item[aria-expanded="true"] .service-accordion-content {
+        padding: 0 1.5rem 1.5rem 1.5rem;
+    }
+
+    .service-accordion-content h3 {
+        font-size: 1.2rem;
     }
 
     .contact-cta-title {
