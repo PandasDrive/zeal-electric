@@ -137,7 +137,7 @@ body {
 .nav-brand {
     position: absolute;
     left: 50%;
-    top: 150px; /* Fixed position - half of 300px min-height */
+    top: 75px; /* Moved up more for better centering - was 140px */
     transform: translate(-50%, -50%) translateZ(0);
     -webkit-transform: translate(-50%, -50%) translateZ(0);
     z-index: 10;
@@ -161,8 +161,8 @@ body {
 }
 
 .navbar-collapsed .nav-brand {
-    /* Fixed position - half of 120px collapsed min-height = 60px */
-    top: 60px;
+    /* Moved up more - was 56px, now 52px for proportional adjustment */
+    top: 32px;
     transform: translate(-50%, -50%) translateZ(0);
     -webkit-transform: translate(-50%, -50%) translateZ(0);
 }
