@@ -43,31 +43,52 @@ document.addEventListener('DOMContentLoaded', function() {
     const navbar = document.getElementById('navbar');
     const logoImg = document.querySelector('.logo-img');
     const heroSection = document.querySelector('.hero');
+    const navBrand = document.querySelector('.nav-brand');
     let lastScroll = 0;
+    let ticking = false;
+    let isCollapsed = false;
     const scrollThreshold = 100; // Pixels to scroll before collapsing
     
-    window.addEventListener('scroll', function() {
+    function updateNavbar() {
         const currentScroll = window.pageYOffset;
+        const shouldCollapse = currentScroll > scrollThreshold;
         
-        if (navbar) {
-            if (currentScroll > scrollThreshold) {
-                navbar.classList.add('navbar-collapsed');
-                navbar.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.3)';
-            } else {
-                navbar.classList.remove('navbar-collapsed');
-                navbar.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.1)';
-            }
+        if (navbar && shouldCollapse !== isCollapsed) {
+            // Use requestAnimationFrame for the actual DOM change to ensure smooth transition
+            requestAnimationFrame(function() {
+                isCollapsed = shouldCollapse;
+                
+                if (shouldCollapse) {
+                    navbar.classList.add('navbar-collapsed');
+                    navbar.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.3)';
+                } else {
+                    navbar.classList.remove('navbar-collapsed');
+                    navbar.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.1)';
+                }
+            });
         }
         
         if (heroSection) {
             if (currentScroll > scrollThreshold) {
-                heroSection.classList.add('hero-collapsed');
+                if (!heroSection.classList.contains('hero-collapsed')) {
+                    heroSection.classList.add('hero-collapsed');
+                }
             } else {
-                heroSection.classList.remove('hero-collapsed');
+                if (heroSection.classList.contains('hero-collapsed')) {
+                    heroSection.classList.remove('hero-collapsed');
+                }
             }
         }
         
         lastScroll = currentScroll;
+        ticking = false;
+    }
+    
+    window.addEventListener('scroll', function() {
+        if (!ticking) {
+            window.requestAnimationFrame(updateNavbar);
+            ticking = true;
+        }
     });
     
     // Smooth scroll for anchor links
@@ -176,6 +197,24 @@ document.addEventListener('DOMContentLoaded', function() {
                     otherItem.setAttribute('aria-expanded', 'false');
                 }
             });
+            
+            // Toggle current item
+            if (isExpanded) {
+                this.setAttribute('aria-expanded', 'false');
+                item.setAttribute('aria-expanded', 'false');
+            } else {
+                this.setAttribute('aria-expanded', 'true');
+                item.setAttribute('aria-expanded', 'true');
+            }
+        });
+    });
+
+    // FAQ Accordion Functionality
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    faqQuestions.forEach(question => {
+        question.addEventListener('click', function() {
+            const item = this.parentElement;
+            const isExpanded = this.getAttribute('aria-expanded') === 'true';
             
             // Toggle current item
             if (isExpanded) {

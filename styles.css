@@ -10,9 +10,9 @@
     --primary-color: #000000;
     --primary-dark: #000000;
     --primary-light: #1a1a1a;
-    --accent-color: #00ff88;
-    --accent-dark: #00cc6f;
-    --accent-light: #33ffa3;
+    --accent-color: #00cc6f;
+    --accent-dark: #00a85a;
+    --accent-light: #00e67a;
     --secondary-color: #2d2d2d;
     --bg-dark: #000000;
     --bg-dark-gray: #1a1a1a;
@@ -53,13 +53,23 @@ body {
     position: sticky;
     top: 0;
     z-index: 1000;
-    transition: all 0.3s ease;
+    transition: box-shadow 0.3s ease;
     border-bottom: 1px solid var(--border-color);
-    padding: 1.5rem 0;
+    padding: 4rem 0; /* Extra padding to accommodate large logo */
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    /* Use transform instead of padding change to prevent layout shifts */
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
 }
 
 .navbar-collapsed {
-    padding: 0.75rem 0;
+    /* Don't change padding - use transform to create visual collapse */
+    padding: 4rem 0;
+    transform: translateY(-3rem) translateZ(0);
+    -webkit-transform: translateY(-3rem) translateZ(0);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
 }
 
 .navbar .container {
@@ -68,12 +78,17 @@ body {
     align-items: center;
     padding: 0 20px;
     position: relative;
-    transition: all 0.3s ease;
-    min-height: 80px;
+    min-height: 220px;
+    overflow: visible;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    /* No transitions on container - keeps everything stable */
+    will-change: auto;
 }
 
 .navbar-collapsed .container {
-    min-height: 60px;
+    /* Don't change anything - prevents any recalculation */
+    min-height: 220px;
     padding: 0 20px;
 }
 
@@ -87,32 +102,32 @@ body {
 .nav-left {
     display: flex;
     justify-content: flex-start;
-    padding-right: 150px; /* Space for centered logo */
+    padding-right: 180px; /* Space for centered logo */
 }
 
 .nav-right {
     display: flex;
     justify-content: flex-end;
-    padding-left: 150px; /* Space for centered logo */
+    padding-left: 180px; /* Space for centered logo */
 }
 
 @media (max-width: 1200px) {
     .nav-left {
-        padding-right: 120px;
+        padding-right: 160px;
     }
 
     .nav-right {
-        padding-left: 120px;
+        padding-left: 180px;
     }
 }
 
 @media (max-width: 992px) {
     .nav-left {
-        padding-right: 100px;
+        padding-right: 140px;
     }
 
     .nav-right {
-        padding-left: 100px;
+        padding-left: 160px;
     }
 }
 
@@ -120,20 +135,62 @@ body {
     position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) translateZ(0);
+    -webkit-transform: translate(-50%, -50%) translateZ(0);
     z-index: 10;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     width: auto;
-    max-width: 300px;
+    max-width: 700px;
     overflow: visible;
     pointer-events: none;
     white-space: nowrap;
+    margin: 0 auto;
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform-origin: center center;
+    -webkit-transform-origin: center center;
+    /* Counter the navbar transform to keep logo in same visual position */
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navbar-collapsed .nav-brand {
+    /* Move logo back down to compensate for navbar moving up */
+    transform: translate(-50%, -50%) translateY(3rem) translateZ(0);
+    -webkit-transform: translate(-50%, -50%) translateY(3rem) translateZ(0);
 }
 
 .nav-brand .logo {
     pointer-events: all;
+    margin-bottom: 0.5rem;
+}
+
+.nav-phone-under-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: all;
+    margin-top: 0.5rem;
+}
+
+.phone-link-under {
+    color: var(--accent-color);
+    font-weight: 600;
+    font-size: 1rem;
+    white-space: nowrap;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.phone-link-under:hover {
+    color: var(--accent-light);
+}
+
+.navbar-collapsed .nav-phone-under-logo {
+    display: none;
 }
 
 .logo {
@@ -150,10 +207,10 @@ body {
 }
 
 .logo-img {
-    height: 60px;
+    height: 180px;
     width: auto;
-    max-height: 60px;
-    max-width: 200px;
+    max-height: 180px;
+    max-width: 600px;
     min-width: 0;
     object-fit: contain;
     transition: height 0.3s ease, max-width 0.3s ease, width 0.3s ease;
@@ -161,16 +218,21 @@ body {
     flex-shrink: 0;
     flex-grow: 0;
     image-rendering: auto;
+    will-change: height, max-width;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
 }
 
 .navbar-collapsed .logo-img {
-    height: 45px;
-    max-height: 45px;
-    max-width: 180px;
+    height: 110px;
+    max-height: 110px;
+    max-width: 440px;
 }
 
 .navbar-collapsed .nav-brand {
-    max-width: 250px;
+    max-width: 560px;
 }
 
 .logo-text {
@@ -232,6 +294,25 @@ body {
     background: var(--accent-color);
 }
 
+.nav-phone {
+    display: flex;
+    align-items: center;
+    margin-right: 0.5rem; /* Extra spacing after phone number */
+}
+
+.phone-link {
+    color: var(--accent-color) !important;
+    font-weight: 600;
+    font-size: 1.05rem;
+    white-space: nowrap;
+    position: relative;
+    z-index: 1;
+}
+
+.phone-link:hover {
+    color: var(--accent-light) !important;
+}
+
 .nav-toggle {
     display: none;
     flex-direction: column;
@@ -282,6 +363,9 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     transition: min-height 0.3s ease, padding 0.3s ease;
+    will-change: min-height, padding;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .hero-collapsed {
@@ -630,6 +714,256 @@ section {
     opacity: 0.95;
     position: relative;
     z-index: 1;
+}
+
+/* Trust Badges Section */
+.trust-badges-section {
+    background: var(--bg-section);
+    padding: 4rem 0;
+}
+
+.trust-badges-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.trust-badge {
+    text-align: center;
+    padding: 2rem;
+    background: var(--bg-dark-gray);
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    transition: var(--transition);
+}
+
+.trust-badge:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-color);
+    box-shadow: 0 8px 16px rgba(0, 255, 136, 0.1);
+}
+
+.trust-badge-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: var(--accent-color);
+}
+
+.trust-badge h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-white);
+}
+
+.trust-badge p {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Testimonials Section */
+.testimonials-section {
+    background: var(--bg-dark);
+    padding: 5rem 0;
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 2rem auto 0;
+}
+
+.testimonial-card {
+    background: var(--bg-dark-gray);
+    padding: 2rem;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    transition: var(--transition);
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--accent-color);
+}
+
+.testimonial-rating {
+    color: #ffd700;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.testimonial-text {
+    color: var(--text-light);
+    line-height: 1.7;
+    font-style: italic;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+}
+
+.testimonial-author {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.testimonial-author strong {
+    color: var(--text-white);
+    font-size: 1.1rem;
+}
+
+.testimonial-author span {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* FAQ Section */
+.faq-section {
+    background: var(--bg-dark);
+    padding: 5rem 0;
+}
+
+.faq-accordion {
+    max-width: 900px;
+    margin: 2rem auto 0;
+}
+
+.faq-item {
+    background: var(--bg-dark-gray);
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 1rem;
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.faq-item:hover {
+    border-color: var(--accent-color);
+}
+
+.faq-question {
+    width: 100%;
+    background: transparent;
+    border: none;
+    padding: 1.5rem 2rem;
+    cursor: pointer;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    transition: var(--transition);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-white);
+}
+
+.faq-question:hover {
+    background: rgba(0, 255, 136, 0.05);
+}
+
+.faq-icon {
+    color: var(--accent-color);
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+}
+
+.faq-item[aria-expanded="true"] .faq-icon {
+    transform: rotate(180deg);
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+    padding: 0 2rem;
+}
+
+.faq-item[aria-expanded="true"] .faq-answer {
+    max-height: 500px;
+    padding: 0 2rem 1.5rem 2rem;
+}
+
+.faq-answer p {
+    color: var(--text-light);
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* About Section */
+.about-section {
+    background: var(--bg-dark);
+    padding: 5rem 0;
+}
+
+.about-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.about-text {
+    color: var(--text-light);
+    line-height: 1.8;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+.about-content h3 {
+    font-size: 1.8rem;
+    color: var(--text-white);
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.about-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.about-feature {
+    background: var(--bg-dark-gray);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.about-feature strong {
+    display: block;
+    color: var(--accent-color);
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.about-feature p {
+    color: var(--text-light);
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+/* Emergency Contact */
+.contact-item.emergency {
+    border: 2px solid var(--accent-color);
+    border-radius: 8px;
+    padding: 1rem;
+    background: rgba(0, 255, 136, 0.05);
+}
+
+.emergency-link {
+    color: var(--accent-color);
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.emergency-link:hover {
+    color: var(--accent-light);
 }
 
 /* Services Detail */
@@ -1374,15 +1708,15 @@ section {
     }
 
     .logo-img {
-        height: 45px;
-        max-height: 45px;
-        max-width: 150px;
+        height: 90px;
+        max-height: 90px;
+        max-width: 300px;
     }
 
     .navbar-collapsed .logo-img {
-        height: 40px;
-        max-height: 40px;
-        max-width: 140px;
+        height: 80px;
+        max-height: 80px;
+        max-width: 280px;
     }
 
     .logo-text {
@@ -1520,12 +1854,12 @@ section {
 
     .navbar .container {
         padding: 0 10px;
-        min-height: 60px;
+        min-height: 120px; /* Keep constant height on mobile too */
         flex-wrap: wrap;
     }
 
     .navbar-collapsed .container {
-        min-height: 50px;
+        min-height: 120px; /* Don't change height */
     }
 
     .nav-brand {
@@ -1544,15 +1878,15 @@ section {
     }
 
     .logo-img {
-        height: 40px;
-        max-height: 40px;
-        max-width: 120px;
+        height: 80px;
+        max-height: 80px;
+        max-width: 240px;
     }
 
     .navbar-collapsed .logo-img {
-        height: 35px;
-        max-height: 35px;
-        max-width: 110px;
+        height: 70px;
+        max-height: 70px;
+        max-width: 220px;
     }
 
     .logo-text {
@@ -1615,6 +1949,10 @@ section {
     .services-grid,
     .service-detail-grid {
         grid-template-columns: 1fr;
+    }
+
+    .nav-phone {
+        display: none;
     }
 
     /* Services Accordion Mobile */
