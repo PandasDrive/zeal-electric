@@ -53,23 +53,25 @@ body {
     position: sticky;
     top: 0;
     z-index: 1000;
-    transition: box-shadow 0.3s ease;
+    transition: box-shadow 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     border-bottom: 1px solid var(--border-color);
-    padding: 4rem 0; /* Extra padding to accommodate large logo */
-    will-change: transform;
+    padding: 4rem 0;
+    /* Use min-height to keep navbar from changing total height during transition */
+    min-height: 300px;
+    will-change: min-height;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
-    /* Use transform instead of padding change to prevent layout shifts */
     transform: translateZ(0);
     -webkit-transform: translateZ(0);
 }
 
 .navbar-collapsed {
-    /* Don't change padding - use transform to create visual collapse */
+    /* Keep padding constant, reduce min-height for visual collapse */
     padding: 4rem 0;
-    transform: translateY(-3rem) translateZ(0);
-    -webkit-transform: translateY(-3rem) translateZ(0);
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+    min-height: 120px;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    transition: min-height 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .navbar .container {
@@ -78,17 +80,18 @@ body {
     align-items: center;
     padding: 0 20px;
     position: relative;
-    min-height: 220px;
+    /* Container fills navbar height - adapts to min-height changes */
+    height: 100%;
     overflow: visible;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
-    /* No transitions on container - keeps everything stable */
+    /* No transitions on container - let parent handle it */
     will-change: auto;
 }
 
 .navbar-collapsed .container {
-    /* Don't change anything - prevents any recalculation */
-    min-height: 220px;
+    /* Fills collapsed navbar height */
+    height: 100%;
     padding: 0 20px;
 }
 
@@ -134,7 +137,7 @@ body {
 .nav-brand {
     position: absolute;
     left: 50%;
-    top: 50%;
+    top: 150px; /* Fixed position - half of 300px min-height */
     transform: translate(-50%, -50%) translateZ(0);
     -webkit-transform: translate(-50%, -50%) translateZ(0);
     z-index: 10;
@@ -148,19 +151,20 @@ body {
     pointer-events: none;
     white-space: nowrap;
     margin: 0 auto;
-    will-change: transform;
+    will-change: transform, top;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     transform-origin: center center;
     -webkit-transform-origin: center center;
-    /* Counter the navbar transform to keep logo in same visual position */
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Smooth transition to match navbar min-height change */
+    transition: top 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .navbar-collapsed .nav-brand {
-    /* Move logo back down to compensate for navbar moving up */
-    transform: translate(-50%, -50%) translateY(3rem) translateZ(0);
-    -webkit-transform: translate(-50%, -50%) translateY(3rem) translateZ(0);
+    /* Fixed position - half of 120px collapsed min-height = 60px */
+    top: 60px;
+    transform: translate(-50%, -50%) translateZ(0);
+    -webkit-transform: translate(-50%, -50%) translateZ(0);
 }
 
 .nav-brand .logo {
@@ -213,22 +217,27 @@ body {
     max-width: 600px;
     min-width: 0;
     object-fit: contain;
-    transition: height 0.3s ease, max-width 0.3s ease, width 0.3s ease;
+    /* Use scale transform instead of height/width for ultra-smooth GPU-accelerated transition */
+    transform: translateZ(0) scale(1);
+    -webkit-transform: translateZ(0) scale(1);
+    /* Slower, more deliberate transition for size changes */
+    transition: transform 3s cubic-bezier(0.16, 1, 0.3, 1), height 3s cubic-bezier(0.16, 1, 0.3, 1), max-width 1s cubic-bezier(0.16, 1, 0.3, 1);
     display: block;
     flex-shrink: 0;
     flex-grow: 0;
     image-rendering: auto;
-    will-change: height, max-width;
+    will-change: transform;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
-    transform: translateZ(0);
-    -webkit-transform: translateZ(0);
 }
 
 .navbar-collapsed .logo-img {
     height: 110px;
     max-height: 110px;
     max-width: 440px;
+    /* Smooth scale transition - scale is approximately 110/180 = 0.611 */
+    transform: translateZ(0) scale(0.611);
+    -webkit-transform: translateZ(0) scale(0.611);
 }
 
 .navbar-collapsed .nav-brand {
