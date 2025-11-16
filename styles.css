@@ -181,16 +181,22 @@ body {
 }
 
 .phone-link-under {
-    color: var(--accent-color);
+    color: var(--text-white);
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 1.2rem;
     white-space: nowrap;
     text-decoration: none;
     transition: var(--transition);
+    background: var(--bg-dark-gray);
+    padding: 0.5rem 1.5rem;
+    border-radius: 6px;
+    display: inline-block;
+    letter-spacing: 0.5px;
 }
 
 .phone-link-under:hover {
-    color: var(--accent-light);
+    color: var(--accent-color);
+    background: var(--secondary-color);
 }
 
 .navbar-collapsed .nav-phone-under-logo {
@@ -535,11 +541,11 @@ section {
 .mission-text {
     font-size: 1.1rem;
     line-height: 1.8;
-    color: var(--text-light);
+    color: var(--text-muted);
 }
 
 .mission-text strong {
-    color: var(--text-white);
+    color: var(--text-light);
 }
 
 /* Gallery Section */
